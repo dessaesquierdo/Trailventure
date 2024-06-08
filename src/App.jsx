@@ -1,9 +1,9 @@
 // Import modules and components
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
-import Header from './pages/layouts/Header';
-import Footer from './pages/layouts/Footer';
-import React from 'react';
+import Header from "./components/layouts/Header";
+import Footer from "./components/layouts/Footer";
+import React from "react";
 
 // Create a Layout component that includes the Header, Footer, and the children elements which are the pages displayed
 const Layout = ({ children }) => {

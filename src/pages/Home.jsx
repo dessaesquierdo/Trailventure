@@ -1,6 +1,3 @@
-import Header from './layouts/Header';
-import Footer from './layouts/Footer';
-
 function Home() {
   return (
     <>
@@ -8,7 +5,6 @@ function Home() {
         <h1>Home Page</h1>
       </main>
     </>
-    
   );
 }
 
