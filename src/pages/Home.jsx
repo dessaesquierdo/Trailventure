@@ -1,12 +1,16 @@
-import Layout from "../components/Layout";
+import ProductCard from "../components/contents/ProductCard";
 
 function Home() {
   return (
-    <Layout>
-      <main>
-        <h1>Home Page</h1>
-      </main>
-    </Layout>
+    <main>
+      <h1>Home Page</h1>
+
+      <h1>BRAND NEW!</h1>
+      <ProductCard />
+
+      <h1>BEST SALES!</h1>
+      <ProductCard />
+    </main>
   );
 }
 

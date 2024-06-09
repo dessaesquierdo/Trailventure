@@ -1,21 +1,40 @@
-// Import modules and components
+import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Layout from "./components/Layout";
 
+// Define routes
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: (
+      <Layout>
+        <Home />
+      </Layout>
+    ),
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <Layout>
+        <div
+          className="text-white flex justify-center items-center bg-cover h-[100vh]"
+          style={{ background: "url('../src/assets/adventurebg.png')" }}
+        >
+          <Login />
+        </div>
+      </Layout>
+    ),
   },
   {
     path: "/signup",
-    element: <Signup />,
+    element: (
+      <Layout>
+        <Signup />
+      </Layout>
+    ),
   },
 ]);
 
