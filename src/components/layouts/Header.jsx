@@ -6,9 +6,11 @@ function Header() {
 
   console.log("Current Path:", currentPath);
 
+  // Show the search link if the current path is not /login or /signup, to avoid showing the search link on the login and signup pages
   const showSearchLink = currentPath !== "/login" && currentPath !== "/signup";
   const showBuyNowLink = showSearchLink;
 
+  // Log the values of showSearchLink and showBuyNowLink in browser console
   console.log("Show Search Link:", showSearchLink);
   console.log("Show Buy Now Link:", showBuyNowLink);
 

@@ -5,7 +5,7 @@ function Login() {
     <div className="bg-slate-800 border-slate-400 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative">
       <h1 className="text-4xl text-whitefont-bold text-center mb-6">Login</h1>
 
-      <form>
+      <form action="">
         <div className="relative my-4">
           <input
             type="email"
