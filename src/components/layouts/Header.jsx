@@ -1,8 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { auth } from "../../utils/firebase";
 
 function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
+
+  // live user data
+  const { user } = useAuth();
 
   console.log("Current Path:", currentPath);
 
@@ -32,14 +37,22 @@ function Header() {
 
           <div className="inline-block w-0.5 self-stretch bg-neutral-100 dark:bg-white/10" />
 
-          {showBuyNowLink && (
-            <Link
-              to="/login"
-              className="px-3 py-1 border-radius rounded-md bg-blue-600 text-black dark:text-white"
-            >
-              BUY NOW!
-            </Link>
-          )}
+          {showBuyNowLink &&
+            (!user ? (
+              <Link
+                to="/login"
+                className="px-3 py-1 border-radius rounded-md bg-blue-600 text-black dark:text-white"
+              >
+                BUY NOW!
+              </Link>
+            ) : (
+              <button
+                onClick={() => auth.signOut()}
+                className="px-3 py-1 border-radius rounded-md bg-red-600 text-black dark:text-white"
+              >
+                Logout
+              </button>
+            ))}
         </nav>
       </div>
     </header>
