@@ -11,6 +11,7 @@ import { auth } from "../utils/firebase";
 import { FirebaseError } from "firebase/app";
 
 function Login() {
+  // variables for react-hook-form
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -36,6 +37,7 @@ function Login() {
     },
   });
 
+  // function that handles login to the firebase
   const handleLogin = async (data) => {
     try {
       setLoading(true);
