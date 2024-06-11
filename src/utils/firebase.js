@@ -15,7 +15,11 @@ const firebaseConfig = {
 
 // initialize firebase app
 const app = initializeApp(firebaseConfig);
+
+// initialize firebase authentication
 const auth = getAuth(app);
+
+// initialize firebase firestore for database uses
 const db = getFirestore(app);
 
 export { auth, db };

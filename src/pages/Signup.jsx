@@ -11,6 +11,7 @@ function Signup() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  // stting up react-hook-form and make email, password, and confirmPassword required with default values
   const { register, watch, formState, setError, handleSubmit } = useForm({
     defaultValues: {
       email: "",
@@ -26,6 +27,7 @@ function Signup() {
     }
   }, [user, navigate]);
 
+  // handle signup form submission
   const handleSignup = async (data) => {
     try {
       setLoading(true);
@@ -39,6 +41,10 @@ function Signup() {
 
       // firebase error handling
       if (error instanceof FirebaseError) {
+        // console log the error code
+        console.log(error.code);
+
+        // handle specific error codes
         if (error.code === "auth/email-already-in-use") {
           setError("email", {
             type: "custom",
@@ -122,6 +128,7 @@ function Signup() {
                   value: 8,
                   message: "Password must be at least 8 characters long",
                 },
+
                 pattern: {
                   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
                   message:
@@ -129,6 +136,7 @@ function Signup() {
                 },
               })}
             />
+
             <label
               htmlFor=""
               className="after:content[''] pointer-events-none absolute left-0  -top-1.5 flex h-full w-full select-none !overflow-visible truncate text-[11px] font-normal leading-tight text-white transition-all after:absolute after:-bottom-1.5 after:block after:w-full after:scale-x-0 after:border-b-2 after:border-gray-500 after:transition-transform after:duration-300 peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[4.25] peer-placeholder-shown:text-blue-gray-500 peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-white peer-focus:after:scale-x-100 peer-focus:after:border-white peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500"
@@ -136,6 +144,8 @@ function Signup() {
               Password
             </label>
           </div>
+
+          {/* Making error password red */}
           {formState.errors.password && (
             <span className="text-red-500 text-sm">
               {formState.errors.password.message}
@@ -151,6 +161,7 @@ function Signup() {
               className="peer h-full w-full border-b border-blue-gray-200 bg-transparent pt-4 pb-1.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border-blue-gray-200 focus:border-gray-500 focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50 placeholder:opacity-0 focus:placeholder:opacity-100"
               {...register("confirmPassword", {
                 required: "Please confirm your password",
+
                 validate: (value) => {
                   if (watch("password") != value) {
                     return "Your passwords do no match";
@@ -166,18 +177,22 @@ function Signup() {
             </label>
           </div>
         </div>
+
+        {/* making confirm password error red */}
         {formState.errors.confirmPassword && (
           <span className="text-red-500 text-sm">
             {formState.errors.confirmPassword.message}
           </span>
         )}
 
+        {/* making other form of error red */}
         {formState.errors.root && (
           <span className="text-red-500 text-sm">
             {formState.errors.root.message}
           </span>
         )}
 
+        {/* Submit button, with states */}
         <button
           type="submit"
           className="w-full  mb-4 text-[18px] mt-6 rounded-full bg-white text-blue-500 hover:bg-blue-500 hover:text-white py-2 transition-colors duration-300"
