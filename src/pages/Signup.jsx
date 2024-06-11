@@ -11,7 +11,8 @@ function Signup() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // stting up react-hook-form and make email, password, and confirmPassword required with default values
+  // react hook form for form validation
+  // https://www.react-hook-form.com/api/useform/
   const { register, watch, formState, setError, handleSubmit } = useForm({
     defaultValues: {
       email: "",
@@ -41,9 +42,6 @@ function Signup() {
 
       // firebase error handling
       if (error instanceof FirebaseError) {
-        // console log the error code
-        console.log(error.code);
-
         // handle specific error codes
         if (error.code === "auth/email-already-in-use") {
           setError("email", {
@@ -85,6 +83,8 @@ function Signup() {
         Create an Account
       </h1>
 
+      {/* Run the handleSubmit function when the form is submitted to run validation */
+      /* handleSignup is the function that runs when the form is submitted */}
       <form onSubmit={handleSubmit(handleSignup)}>
         <div>
           {/* Email input */}
@@ -109,6 +109,8 @@ function Signup() {
               Email
             </label>
           </div>
+
+          {/* When there is an error in the email field, display the error message */}
           {formState.errors.email && (
             <span className="text-red-500 text-sm">
               {formState.errors.email.message}
@@ -145,7 +147,7 @@ function Signup() {
             </label>
           </div>
 
-          {/* Making error password red */}
+          {/* When there is an error in the password field, display the error message */}
           {formState.errors.password && (
             <span className="text-red-500 text-sm">
               {formState.errors.password.message}
@@ -178,21 +180,22 @@ function Signup() {
           </div>
         </div>
 
-        {/* making confirm password error red */}
+        {/* When there is an error in the confirm password field, display the error message */}
         {formState.errors.confirmPassword && (
           <span className="text-red-500 text-sm">
             {formState.errors.confirmPassword.message}
           </span>
         )}
 
-        {/* making other form of error red */}
+        {/* When there is an error in the root field, display the error message */
+        /* Root field is a generic error message for all errors */}
         {formState.errors.root && (
           <span className="text-red-500 text-sm">
             {formState.errors.root.message}
           </span>
         )}
 
-        {/* Submit button, with states */}
+        {/* Form submit */}
         <button
           type="submit"
           className="w-full  mb-4 text-[18px] mt-6 rounded-full bg-white text-blue-500 hover:bg-blue-500 hover:text-white py-2 transition-colors duration-300"
@@ -201,7 +204,7 @@ function Signup() {
           {loading ? "Creating Account..." : "Create Account"}
         </button>
 
-        {/* Redirect to Login page if dont have an account */}
+        {/* Link to Login page if don't have an account */}
         <div>
           <span>Already have an account? </span>
           <Link to="/login" className="text-blue-500">
