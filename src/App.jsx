@@ -47,16 +47,16 @@ const router = createBrowserRouter([
   },
 
   // Path for Search page
-  {
-    path: "/search",
-    element: (
-      <Layout>
-        <div style={{ background: "url('../src/assets/hiking_bg.png')" }}>
-          <Search />
-        </div>
-      </Layout>
-    ),
-  },
+  // {
+  //   path: "/search",
+  //   element: (
+  //     <Layout>
+  //       <div style={{ background: "url('../src/assets/hiking_bg.png')" }}>
+  //         <Search />
+  //       </div>
+  //     </Layout>
+  //   ),
+  // },
 ]);
 
 // Define the main App component
