@@ -10,6 +10,9 @@ function Home() {
 
       <h1>BEST SALES!</h1>
       <ProductCard />
+
+      <h1>FOR YOU</h1>
+      <ProductCard />
     </main>
   );
 }
