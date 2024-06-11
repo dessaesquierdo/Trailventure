@@ -37,7 +37,7 @@ function Login() {
     },
   });
 
-  // function that handles login to the firebase
+  // arrow function to handle login
   const handleLogin = async (data) => {
     try {
       setLoading(true);

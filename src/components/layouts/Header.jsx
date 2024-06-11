@@ -6,7 +6,7 @@ function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  // live user data
+  // get the user session data
   const { user } = useAuth();
 
   console.log("Current Path:", currentPath);
