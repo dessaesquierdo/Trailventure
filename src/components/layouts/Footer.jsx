@@ -1,53 +1,37 @@
-import { Typography } from "@material-tailwind/react";
-
 function Footer() {
   return (
-    <footer className="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between dark:bg-neutral-700">
-      <Typography color="white" className="font-normal">
-        &copy; 2024 Trailventure
-      </Typography>
-      <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
-        <li>
-          <Typography
-            as="a"
-            href="#"
-            color="white"
-            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-          >
-            About Us
-          </Typography>
-        </li>
-        <li>
-          <Typography
-            as="a"
-            href="#"
-            color="white"
-            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-          >
-            License
-          </Typography>
-        </li>
-        <li>
-          <Typography
-            as="a"
-            href="#"
-            color="white"
-            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-          >
-            Contribute
-          </Typography>
-        </li>
-        <li>
-          <Typography
-            as="a"
-            href="#"
-            color="white"
-            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-          >
-            Contact Us
-          </Typography>
-        </li>
-      </ul>
+    <footer className="reltative dark:bg-gray-800">
+      <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+        <span className="text-sm text-gray-500 sm:text-center dark:text-gray-200">
+          &copy; 2023{" "}
+          <a href="/" className="hover:underline">
+            Trailventure
+          </a>
+          . All Rights Reserved.
+        </span>
+        <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-200 sm:mt-0">
+          <li>
+            <a href="#" className="hover:underline me-4 md:me-6">
+              About
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:underline me-4 md:me-6">
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:underline me-4 md:me-6">
+              Licensing
+            </a>
+          </li>
+          <li>
+            <a href="#" className="hover:underline">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
     </footer>
   );
 }
