@@ -10,15 +10,19 @@ function useAuth() {
 
   // add listener on component mount
   useEffect(() => {
-    // if the user is logged in set the user session data to loggedin or true
+    // listen for changes to the user session data and set the user state
     const unSubscribeAuth = onAuthStateChanged(auth, async (user) => {
       setUser(user);
     });
 
-    // if the use is logged out or none set the user session data to loggedout or false
+    // when the component unmounts, remove the listener to avoid memory leaks
     return () => unSubscribeAuth();
   }, [navigate]);
 
+  // return user session data
+  // user can be User object or null
+  // https://firebase.google.com/docs/reference/js/v8/firebase.User
+  console.log(user);
   return { user };
 }
 
