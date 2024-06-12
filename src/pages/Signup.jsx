@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { setDoc, doc } from "firebase/firestore"; // Import setDoc and doc
 import useAuth from "../hooks/useAuth";
-import { auth } from "../utils/firebase";
+import { auth, db } from "../utils/firebase"; // Import db from your firebase configuration
 
 function Signup() {
   const [loading, setLoading] = useState(false);
@@ -34,7 +35,20 @@ function Signup() {
       setLoading(true);
 
       // create user with email and password
-      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password,
+      );
+
+      // Get the newly created user
+      const newUser = userCredential.user;
+
+      // Assign the default role "user" in Firestore,
+      await setDoc(doc(db, "users", newUser.uid), {
+        role: "user",
+        email: data.email,
+      });
 
       setLoading(false);
     } catch (error) {
@@ -79,7 +93,7 @@ function Signup() {
 
   return (
     <div className="bg-slate-800 border-slate-400 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative">
-      <h1 className="text-4xl text-whitefont-bold text-center mb-6">
+      <h1 className="text-4xl text-white font-bold text-center mb-6">
         Create an Account
       </h1>
 

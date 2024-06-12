@@ -23,6 +23,7 @@ function Header() {
     <header className="relative flex w-full flex-wrap items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:py-4">
       <div className="px-3 flex w-full flex-wrap items-center justify-between">
         <div className="ml-2">
+          {/* Nav Title page */}
           <Link to="/" className="text-2xl text-black dark:text-white">
             TrailVenture
           </Link>
@@ -35,8 +36,13 @@ function Header() {
             </Link>
           )}
 
+          {/* Link to Admin Dashboard, Only users with admin role can access this */}
+          <Link to="/admin/dashboard">Admin</Link>
+
+          {/* Line Separator */}
           <div className="inline-block w-0.5 self-stretch bg-neutral-100 dark:bg-white/10" />
 
+          {/* Login and Logout buttons deirect page */}
           {showBuyNowLink &&
             (!user ? (
               <Link

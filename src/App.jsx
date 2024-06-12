@@ -1,4 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+
+// Import pages
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -6,9 +8,16 @@ import Layout from "./components/Layout";
 import Cart from "./pages/Cart";
 import CheckOut from "./pages/CheckOut";
 
+// Import Unauthorized pages
+import Unauthorized from "./pages/Unauthorized";
+
+// Import Admin pages
+import AdminDashboard from "./pages/Admin/AdminDashboard";
+import AdminAddProduct from "./pages/Admin/AdminAddProduct";
+
 // Define routes
 const router = createBrowserRouter([
-  // Path for the Home page
+  // Path for the Home/main page
   {
     path: "/",
     element: (
@@ -58,12 +67,22 @@ const router = createBrowserRouter([
     ),
   },
 
-  // path for Checkout page
+  // Path for Checkout page
   {
     path: "/checkout",
     element: (
       <Layout>
         <CheckOut />
+      </Layout>
+    ),
+  },
+
+  // Path for the Unauthorized page
+  {
+    path: "/unauthorized",
+    element: (
+      <Layout>
+        <Unauthorized />
       </Layout>
     ),
   },
@@ -79,6 +98,27 @@ const router = createBrowserRouter([
   //     </Layout>
   //   ),
   // },
+
+  // ===============| Admin Routes |================
+  // Path for Admin dashboard, use protected routes
+  {
+    path: "/admin/dashboard",
+    element: (
+      <Layout>
+        <AdminDashboard />
+      </Layout>
+    ),
+  },
+
+  // Path for Admin add product
+  {
+    path: "/admin/addproduct",
+    element: (
+      <Layout>
+        <AdminAddProduct />
+      </Layout>
+    ),
+  },
 ]);
 
 // Define the main App component
