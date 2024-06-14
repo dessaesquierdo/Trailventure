@@ -51,7 +51,7 @@ function ProductCard() {
   };
 
   return (
-    <div className="flex space-x-4 overflow-x-auto">
+    <div className="flex space-x-4">
       {products.slice(0, 5).map((product) => (
         <div
           key={product.productID}
