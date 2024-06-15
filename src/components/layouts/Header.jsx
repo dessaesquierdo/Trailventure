@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { auth } from "../../utils/firebase";
 
@@ -9,15 +10,16 @@ function Header() {
   // get the user session data
   const { user } = useAuth();
 
+  const handleLogout = async () => {
+    await auth.signOut();
+    toast.success("Successfuly logged out");
+  };
+
   console.log("Current Path:", currentPath);
 
   // Show the search link if the current path is not /login or /signup, to avoid showing the search link on the login and signup pages
   const showSearchLink = currentPath !== "/login" && currentPath !== "/signup";
   const showBuyNowLink = showSearchLink;
-
-  // Log the values of showSearchLink and showBuyNowLink in browser console
-  console.log("Show Search Link:", showSearchLink);
-  console.log("Show Buy Now Link:", showBuyNowLink);
 
   return (
     <header className="relative flex w-full flex-wrap items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:py-4">
@@ -53,7 +55,7 @@ function Header() {
               </Link>
             ) : (
               <button
-                onClick={() => auth.signOut()}
+                onClick={handleLogout}
                 className="px-3 py-1 border-radius rounded-md bg-red-600 text-black dark:text-white"
               >
                 Logout

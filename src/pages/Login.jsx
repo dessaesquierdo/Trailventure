@@ -9,6 +9,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { FirebaseError } from "firebase/app";
+import { toast } from "react-toastify";
 
 function Login() {
   // variables for react-hook-form
@@ -49,6 +50,7 @@ function Login() {
 
       // sign in with email and password
       await signInWithEmailAndPassword(auth, data.email, data.password);
+      toast.success("Successfuly logged in");
 
       setLoading(false);
     } catch (error) {

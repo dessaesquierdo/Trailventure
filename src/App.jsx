@@ -15,6 +15,9 @@ import Unauthorized from "./pages/Unauthorized";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import AdminAddProduct from "./pages/Admin/AdminAddProduct";
 
+// css
+import "react-toastify/dist/ReactToastify.css";
+
 // Define routes
 const router = createBrowserRouter([
   // Path for the Home/main page

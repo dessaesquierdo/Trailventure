@@ -6,6 +6,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { setDoc, doc } from "firebase/firestore"; // Import setDoc and doc
 import useAuth from "../hooks/useAuth";
 import { auth, db } from "../utils/firebase"; // Import db from your firebase configuration
+import { toast } from "react-toastify";
 
 function Signup() {
   const [loading, setLoading] = useState(false);
@@ -49,6 +50,8 @@ function Signup() {
         role: "user",
         email: data.email,
       });
+
+      toast.success("Account created successfuly");
 
       setLoading(false);
     } catch (error) {
