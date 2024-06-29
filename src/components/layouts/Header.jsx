@@ -1,12 +1,18 @@
 import { Link, useLocation } from "react-router-dom";
+import { useAtom } from "jotai";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { auth } from "../../utils/firebase";
-import { TbShoppingCart } from "react-icons/tb";
+import { shoppingCartAtom } from "../../atom/shoppingCart";
+import { TbShoppingCart, TbX } from "react-icons/tb";
+import { useEffect, useState } from "react";
 
 function Header() {
   const location = useLocation();
   const currentPath = location.pathname;
+
+  const [shoppingCart] = useAtom(shoppingCartAtom);
+  const [shoppingCartOpened, setShoppingCartOpened] = useState(false);
 
   // get the user session data
   const { user } = useAuth();
@@ -15,6 +21,10 @@ function Header() {
     await auth.signOut();
     toast.success("Successfuly logged out");
   };
+
+  useEffect(() => {
+    console.log("shopping cart", shoppingCartOpened);
+  }, [shoppingCartOpened]);
 
   console.log("Current Path:", currentPath);
   console.log("User:", user);
@@ -69,9 +79,55 @@ function Header() {
               </button>
             ))}
 
-          <button className="p-2 rounded-md hover:bg-slate-300">
-            <TbShoppingCart className="text-2xl" />
-          </button>
+          <div className="relative">
+            <button
+              className="p-2 rounded-md hover:bg-slate-300"
+              onClick={() => setShoppingCartOpened(true)}
+            >
+              <TbShoppingCart className="text-2xl" />
+            </button>
+
+            <span className="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white aspect-square rounded-full text-xs flex justify-center items-center">
+              {shoppingCart.length}
+            </span>
+          </div>
+
+          <div
+            className={
+              "fixed top-0 right-0 z-40 w-96 px-3 py-4 h-screen overflow-y-auto bg-white shadow-md transition-transform ease-in" +
+              (!shoppingCartOpened ? " translate-x-full" : "")
+            }
+          >
+            <div className="mb-3 flex justify-between">
+              <h2 className="text-xl font-bold">Shopping Cart</h2>
+
+              <button onClick={() => setShoppingCartOpened(false)}>
+                <TbX className="w-7 h-7" />
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              {shoppingCart.map((item) => (
+                <div
+                  key={item.productID}
+                  className="p-3 flex items-center gap-2"
+                >
+                  <img
+                    src={item.productImage}
+                    alt={item.productName}
+                    className="w-20 h-20 object-contain rounded-lg"
+                  />
+
+                  <div>
+                    <p className="text-base font-bold">{item.productName}</p>
+                    <p className="text-red-500 font-bold">
+                      ${item.productPrice}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </nav>
       </div>
     </header>
