@@ -18,7 +18,7 @@ function useAuth() {
         const userDoc = await getDoc(docRef);
 
         if (userDoc.exists()) {
-          setUser({ uID: user.uid, ...userDoc.data() });
+          setUser({ ...user, ...userDoc.data() });
         } else {
           setUser(user);
         }
