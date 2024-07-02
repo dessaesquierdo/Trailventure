@@ -1,7 +1,7 @@
 function Unauthorized() {
   return (
     <div>
-      <h1>Unauthorized Page</h1>
+      <h1>Access Denied. Error 404.</h1>
     </div>
   );
 }

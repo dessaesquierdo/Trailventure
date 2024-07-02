@@ -16,6 +16,8 @@ function Header() {
   };
 
   console.log("Current Path:", currentPath);
+  console.log("User:", user);
+  console.log("User Role:", user?.role);
 
   // Show the search link if the current path is not /login or /signup, to avoid showing the search link on the login and signup pages
   const showSearchLink = currentPath !== "/login" && currentPath !== "/signup";
@@ -39,7 +41,11 @@ function Header() {
           )}
 
           {/* Link to Admin Dashboard, Only users with admin role can access this */}
-          <Link to="/admin/dashboard">Admin</Link>
+          {user && user.role === "admin" && (
+            <Link to="/admin/dashboard" className="text-black dark:text-white">
+              Admin Dashboard
+            </Link>
+          )}
 
           {/* Line Separator */}
           <div className="inline-block w-0.5 self-stretch bg-neutral-100 dark:bg-white/10" />

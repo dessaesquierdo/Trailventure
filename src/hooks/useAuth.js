@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../utils/firebase";
+import { auth, db } from "../utils/firebase"; // Ensure db is imported
+import { doc, getDoc } from "firebase/firestore"; // Import Firestore methods
 
 // listening for live user session data
 function useAuth() {
@@ -12,7 +13,14 @@ function useAuth() {
   useEffect(() => {
     // listen for changes to the user session data and set the user state
     const unSubscribeAuth = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
+      if (user) {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          setUser({ uID: user.uid, ...userDoc.data() });
+        }
+      } else {
+        setUser(null);
+      }
     });
 
     // when the component unmounts, remove the listener to avoid memory leaks

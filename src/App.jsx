@@ -108,7 +108,9 @@ const router = createBrowserRouter([
     path: "/admin/dashboard",
     element: (
       <Layout>
+        {/* <ProtectedRoute> */}
         <AdminDashboard />
+        {/* </ProtectedRoute> */}
       </Layout>
     ),
   },
@@ -118,7 +120,9 @@ const router = createBrowserRouter([
     path: "/admin/addproduct",
     element: (
       <Layout>
+        {/* <ProtectedRoute> */}
         <AdminAddProduct />
+        {/* </ProtectedRoute> */}
       </Layout>
     ),
   },
