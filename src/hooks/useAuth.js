@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../utils/firebase"; // Ensure db is imported
+import { auth, userCollectionRef } from "../utils/firebase"; // Ensure db is imported
 import { doc, getDoc } from "firebase/firestore"; // Import Firestore methods
 
 // listening for live user session data
@@ -14,9 +14,13 @@ function useAuth() {
     // listen for changes to the user session data and set the user state
     const unSubscribeAuth = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
+        const docRef = doc(userCollectionRef, user.uid);
+        const userDoc = await getDoc(docRef);
+
         if (userDoc.exists()) {
           setUser({ uID: user.uid, ...userDoc.data() });
+        } else {
+          setUser(user);
         }
       } else {
         setUser(null);
