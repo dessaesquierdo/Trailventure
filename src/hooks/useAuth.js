@@ -8,22 +8,31 @@ import { doc, getDoc } from "firebase/firestore"; // Import Firestore methods
 function useAuth() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  const [fetching, setFetching] = useState(true);
 
   // add listener on component mount
   useEffect(() => {
     // listen for changes to the user session data and set the user state
     const unSubscribeAuth = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const docRef = doc(userCollectionRef, user.uid);
-        const userDoc = await getDoc(docRef);
+      try {
+        setFetching(true);
 
-        if (userDoc.exists()) {
-          setUser({ ...user, ...userDoc.data() });
+        if (user) {
+          const docRef = doc(userCollectionRef, user.uid);
+          const userDoc = await getDoc(docRef);
+
+          if (userDoc.exists()) {
+            setUser({ ...user, ...userDoc.data() });
+          } else {
+            setUser(user);
+          }
         } else {
-          setUser(user);
+          setUser(null);
         }
-      } else {
-        setUser(null);
+
+        setFetching(false);
+      } catch (error) {
+        setFetching(false);
       }
     });
 
@@ -35,7 +44,7 @@ function useAuth() {
   // user can be User object or null
   // https://firebase.google.com/docs/reference/js/v8/firebase.User
   console.log(user);
-  return { user };
+  return { user, fetching };
 }
 
 export default useAuth;
