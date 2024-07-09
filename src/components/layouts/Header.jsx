@@ -5,10 +5,11 @@ import useAuth from "../../hooks/useAuth";
 import { auth } from "../../utils/firebase";
 import {
   addQuantity,
+  // removeProduct,
   shoppingCartAtom,
   subtractQuantity,
 } from "../../atom/shoppingCart";
-import { TbMinus, TbPlus, TbShoppingCart, TbX } from "react-icons/tb";
+import { TbMinus, TbPlus, TbShoppingCart, TbTrash, TbX } from "react-icons/tb";
 import { useEffect, useState } from "react";
 
 function Header() {
@@ -119,7 +120,7 @@ function Header() {
                     className="w-20 h-20 object-contain rounded-lg"
                   />
 
-                  <div>
+                  <div className="flex flex-col justify-between flex-grow">
                     <div>
                       <p className="text-base font-bold">{item.productName}</p>
                       <p className="text-red-500 font-bold">
@@ -146,6 +147,18 @@ function Header() {
                         <TbPlus />
                       </button>
                     </div>
+                  </div>
+
+                  <div className="flex flex-col items-end justify-between">
+                    <button
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full text-xs"
+                      // onClick={() => removeProduct(item.productID)}
+                    >
+                      <TbTrash />
+                    </button>
+                    <p>
+                      Total: ${(item.productPrice * item.quantity).toFixed(2)}
+                    </p>
                   </div>
                 </div>
               ))}

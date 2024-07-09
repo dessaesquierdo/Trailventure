@@ -3,6 +3,7 @@ import store from "./store";
 
 const shoppingCartAtom = atom([]);
 
+// Add product to the shopping cart
 const addProduct = (product) => {
   console.log(product);
 
@@ -26,6 +27,14 @@ const addProduct = (product) => {
   });
 };
 
+// Remove product from the shopping cart
+const removeProduct = (productID) => {
+  store.set(shoppingCartAtom, (prev) =>
+    prev.filter((item) => item.productID !== productID),
+  );
+};
+
+// Adds product quantity of the product
 const addQuantity = (productID) => {
   store.set(shoppingCartAtom, (prev) =>
     prev.map((item) => {
@@ -37,6 +46,7 @@ const addQuantity = (productID) => {
   );
 };
 
+// Subtract product quantity of the product
 const subtractQuantity = (productID) => {
   store.set(shoppingCartAtom, (prev) =>
     prev.map((item) => {
@@ -48,4 +58,10 @@ const subtractQuantity = (productID) => {
   );
 };
 
-export { shoppingCartAtom, addProduct, addQuantity, subtractQuantity };
+export {
+  shoppingCartAtom,
+  addProduct,
+  removeProduct,
+  addQuantity,
+  subtractQuantity,
+};
