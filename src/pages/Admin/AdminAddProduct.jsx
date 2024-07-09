@@ -7,6 +7,7 @@ function AdminAddProduct() {
   const { user, fetching } = useAuth();
   const navigate = useNavigate();
 
+  // Check if the user is an admin
   useEffect(() => {
     if (!fetching && user?.role !== "admin") {
       navigate("/unauthorized");

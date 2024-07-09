@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Layout from "./components/Layout";
-import Cart from "./pages/Cart";
 import CheckOut from "./pages/CheckOut";
 
 // Import Unauthorized pages
@@ -60,16 +59,6 @@ const router = createBrowserRouter([
     ),
   },
 
-  // Path for the Cart page
-  {
-    path: "/cart",
-    element: (
-      <Layout>
-        <Cart />
-      </Layout>
-    ),
-  },
-
   // Path for Checkout page
   {
     path: "/checkout",
@@ -108,9 +97,7 @@ const router = createBrowserRouter([
     path: "/admin/dashboard",
     element: (
       <Layout>
-        {/* <ProtectedRoute> */}
         <AdminDashboard />
-        {/* </ProtectedRoute> */}
       </Layout>
     ),
   },
@@ -120,9 +107,7 @@ const router = createBrowserRouter([
     path: "/admin/addproduct",
     element: (
       <Layout>
-        {/* <ProtectedRoute> */}
         <AdminAddProduct />
-        {/* </ProtectedRoute> */}
       </Layout>
     ),
   },

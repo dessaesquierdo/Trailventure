@@ -2,21 +2,21 @@
       productID: 1,
       productImage:
         "https://m.media-amazon.com/images/I/81DaQhY+yRL._AC_UF1000,1000_QL80_.jpg",
-      productName: "Product Name1",
+      productName: "Product Name 1",
       productPrice: "Product Price1",
     },
     {
       productID: 2,
       productImage:
         "https://m.media-amazon.com/images/I/71nDcviv-tL._AC_SL1001_.jpg",
-      productName: "Product Name2",
+      productName: "Product Name 2",
       productPrice: "Product Price2",
     },
     {
       productID: 3,
       productImage:
         "https://i.ebayimg.com/images/g/RU0AAOSwR5VlgqAu/s-l1200.webp",
-      productName: "Product Name3",
+      productName: "Product Name 3",
       productPrice: "Product Price3",
     },
     {
