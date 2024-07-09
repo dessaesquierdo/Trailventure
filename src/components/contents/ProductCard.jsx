@@ -1,9 +1,6 @@
-import { useAtom } from "jotai";
-import { shoppingCartAtom } from "../../atom/shoppingCart";
+import { addProduct } from "../../atom/shoppingCart";
 
 function ProductCard() {
-  const [shoppingCart, setShoppingCart] = useAtom(shoppingCartAtom);
-
   // Sample product list will remove this once add product is ok
   const products = [
     {
@@ -50,11 +47,6 @@ function ProductCard() {
     },
   ];
 
-  // Add to cart function
-  const AddtoCart = (product) => {
-    setShoppingCart([...shoppingCart, product]);
-  };
-
   return (
     <div className="flex space-x-4">
       {products.slice(0, 5).map((product) => (
@@ -74,7 +66,7 @@ function ProductCard() {
           </div>
           <div className="px-4 pt-2 pb-2">
             <button
-              onClick={() => AddtoCart(product)}
+              onClick={() => addProduct(product)}
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded-full text-xs"
             >
               Add to Cart

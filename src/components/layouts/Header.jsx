@@ -3,8 +3,12 @@ import { useAtom } from "jotai";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { auth } from "../../utils/firebase";
-import { shoppingCartAtom } from "../../atom/shoppingCart";
-import { TbShoppingCart, TbX } from "react-icons/tb";
+import {
+  addQuantity,
+  shoppingCartAtom,
+  subtractQuantity,
+} from "../../atom/shoppingCart";
+import { TbMinus, TbPlus, TbShoppingCart, TbX } from "react-icons/tb";
 import { useEffect, useState } from "react";
 
 function Header() {
@@ -108,10 +112,7 @@ function Header() {
 
             <div className="flex flex-col gap-3">
               {shoppingCart.map((item) => (
-                <div
-                  key={item.productID}
-                  className="p-3 flex items-center gap-2"
-                >
+                <div key={item.productID} className="p-3 flex gap-2">
                   <img
                     src={item.productImage}
                     alt={item.productName}
@@ -119,10 +120,32 @@ function Header() {
                   />
 
                   <div>
-                    <p className="text-base font-bold">{item.productName}</p>
-                    <p className="text-red-500 font-bold">
-                      ${item.productPrice}
-                    </p>
+                    <div>
+                      <p className="text-base font-bold">{item.productName}</p>
+                      <p className="text-red-500 font-bold">
+                        ${item.productPrice}
+                      </p>
+                    </div>
+
+                    <div className="mt-2 inline-flex rounded-md overflow-hidden">
+                      <button
+                        className="w-8 h-8 bg-blue-500 hover:bg-blue-700 text-white font-bold flex justify-center items-center"
+                        onClick={() => subtractQuantity(item.productID)}
+                      >
+                        <TbMinus />
+                      </button>
+
+                      <div className="w-8 h-8 border flex justify-center items-center">
+                        {item.quantity}
+                      </div>
+
+                      <button
+                        className="w-8 h-8 bg-blue-500 hover:bg-blue-700 text-white font-bold flex justify-center items-center"
+                        onClick={() => addQuantity(item.productID)}
+                      >
+                        <TbPlus />
+                      </button>
+                    </div>
                   </div>
                 </div>
               ))}
