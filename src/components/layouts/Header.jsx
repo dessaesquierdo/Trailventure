@@ -99,7 +99,7 @@ function Header() {
 
           <div
             className={
-              "fixed top-0 right-0 z-40 w-96 px-3 py-4 h-screen overflow-y-auto bg-white shadow-md transition-transform ease-in" +
+              "fixed top-0 right-0 z-40 flex flex-col w-96 px-3 py-4 min-h-screen h-screen overflow-y-auto bg-white shadow-md transition-transform ease-in" +
               (!shoppingCartOpened ? " translate-x-full" : "")
             }
           >
@@ -111,57 +111,71 @@ function Header() {
               </button>
             </div>
 
-            <div className="flex flex-col gap-3">
-              {shoppingCart.map((item) => (
-                <div key={item.productID} className="p-3 flex gap-2">
-                  <img
-                    src={item.productImage}
-                    alt={item.productName}
-                    className="w-20 h-20 object-contain rounded-lg"
-                  />
+            <div className="flex-1 flex flex-col justify-between">
+              <div className="flex flex-col gap-3">
+                {shoppingCart.map((item) => (
+                  <div key={item.productID} className="p-3 flex gap-2">
+                    <img
+                      src={item.productImage}
+                      alt={item.productName}
+                      className="w-20 h-20 object-contain rounded-lg"
+                    />
 
-                  <div className="flex flex-col justify-between flex-grow">
-                    <div>
-                      <p className="text-base font-bold">{item.productName}</p>
-                      <p className="text-red-500 font-bold">
-                        ${item.productPrice}
-                      </p>
-                    </div>
-
-                    <div className="mt-2 inline-flex rounded-md overflow-hidden">
-                      <button
-                        className="w-8 h-8 bg-blue-500 hover:bg-blue-700 text-white font-bold flex justify-center items-center"
-                        onClick={() => subtractQuantity(item.productID)}
-                      >
-                        <TbMinus />
-                      </button>
-
-                      <div className="w-8 h-8 border flex justify-center items-center">
-                        {item.quantity}
+                    <div className="flex flex-col justify-between flex-grow">
+                      <div>
+                        <p className="text-base font-bold">
+                          {item.productName}
+                        </p>
+                        <p className="text-red-500 font-bold">
+                          ${item.productPrice}
+                        </p>
                       </div>
 
+                      <div className="mt-2 inline-flex rounded-md overflow-hidden">
+                        <button
+                          className="w-8 h-8 bg-blue-500 hover:bg-blue-700 text-white font-bold flex justify-center items-center"
+                          onClick={() => subtractQuantity(item.productID)}
+                        >
+                          <TbMinus />
+                        </button>
+
+                        <div className="w-8 h-8 border flex justify-center items-center">
+                          {item.quantity}
+                        </div>
+
+                        <button
+                          className="w-8 h-8 bg-blue-500 hover:bg-blue-700 text-white font-bold flex justify-center items-center"
+                          onClick={() => addQuantity(item.productID)}
+                        >
+                          <TbPlus />
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col items-end justify-between">
                       <button
-                        className="w-8 h-8 bg-blue-500 hover:bg-blue-700 text-white font-bold flex justify-center items-center"
-                        onClick={() => addQuantity(item.productID)}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full text-xs"
+                        // onClick={() => removeProduct(item.productID)}
                       >
-                        <TbPlus />
+                        <TbTrash />
                       </button>
+                      <p>
+                        Total: ${(item.productPrice * item.quantity).toFixed(2)}
+                      </p>
                     </div>
                   </div>
+                ))}
+              </div>
 
-                  <div className="flex flex-col items-end justify-between">
-                    <button
-                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full text-xs"
-                      // onClick={() => removeProduct(item.productID)}
-                    >
-                      <TbTrash />
-                    </button>
-                    <p>
-                      Total: ${(item.productPrice * item.quantity).toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-              ))}
+              <div className="flex justify-end">
+                <Link
+                  to="/checkout"
+                  onClick={() => setShoppingCartOpened(false)}
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full text-sm"
+                >
+                  Checkout
+                </Link>
+              </div>
             </div>
           </div>
         </nav>
