@@ -1,29 +1,12 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState } from "react";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import React from "react";
 import { addProduct } from "../../atom/shoppingCart";
+import useProduct from "../../hooks/useProduct";
 
-function ProductCard() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const db = getFirestore();
-      const productsItems = collection(db, "products");
-      const productSnapshot = await getDocs(productsItems);
-      const productList = productSnapshot.docs.map((doc) => ({
-        productID: doc.id,
-        ...doc.data(),
-      }));
-      setProducts(productList);
-    };
-
-    fetchProducts();
-  }, []);
-
-  console.log(products);
-
-  // console.log(products.name);
+// eslint-disable-next-line react/prop-types
+function ProductCard({ randomize = false, latest = false }) {
+  // fetch products from Firestore by using custom hook "useProduct"
+  const products = useProduct(randomize, latest);
 
   return (
     <div className="flex space-x-4">

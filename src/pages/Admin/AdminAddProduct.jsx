@@ -22,18 +22,9 @@ function AdminAddProduct() {
     }
   }, [user, fetching, navigate]);
 
-  // Handle image upload
-  const handleImageUpload = async (file) => {
-    const storage = getStorage();
-    const storageRef = ref(storage, `products/${file.name}`);
-    await uploadBytes(storageRef, file);
-    const downloadURL = await getDownloadURL(storageRef);
-    return downloadURL;
-  };
-
   // Add products
-  const addProduct = async (e) => {
-    e.preventDefault();
+  const addProduct = async (event) => {
+    event.preventDefault();
     try {
       const db = getFirestore();
       const imageUrl = await handleImageUpload(productImage);
@@ -48,7 +39,7 @@ function AdminAddProduct() {
 
       alert("Product added successfully!");
       setProductName("");
-      setProductImage(null);
+      setProductImage("");
       setProductDescription("");
       setProductPrice("");
       // setProductStock('');
@@ -56,6 +47,15 @@ function AdminAddProduct() {
       console.error("Error adding product: ", error);
       alert("Error adding product");
     }
+  };
+
+  // Handle image upload
+  const handleImageUpload = async (file) => {
+    const storage = getStorage();
+    const storageRef = ref(storage, `products/${file.name}`);
+    await uploadBytes(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
   };
 
   return (
@@ -71,6 +71,7 @@ function AdminAddProduct() {
             style={styles.input}
           />
         </div>
+
         <div style={styles.formGroup}>
           <label style={styles.label}>Product Image</label>
           <input
@@ -79,6 +80,7 @@ function AdminAddProduct() {
             style={styles.input}
           />
         </div>
+
         <div style={styles.formGroup}>
           <label style={styles.label}>Product Description</label>
           <input
@@ -88,6 +90,7 @@ function AdminAddProduct() {
             style={styles.input}
           />
         </div>
+
         <div style={styles.formGroup}>
           <label style={styles.label}>Product Price</label>
           <input
@@ -97,6 +100,7 @@ function AdminAddProduct() {
             style={styles.input}
           />
         </div>
+
         {/* <div style={styles.formGroup}>
           <label style={styles.label}>Product Stock</label>
           <input
@@ -106,6 +110,7 @@ function AdminAddProduct() {
             style={styles.input}
           />
         </div> */}
+
         <button type="submit" style={styles.button}>
           Add Product
         </button>
