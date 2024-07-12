@@ -48,7 +48,7 @@ function Signup() {
       // Assign the default role "user" in Firestore,
       await setDoc(doc(db, "users", newUser.uid), {
         role: "user",
-        email: data.email,
+        //email: data.email,
       });
 
       toast.success("Account created successfuly");

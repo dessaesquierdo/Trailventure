@@ -3,8 +3,6 @@ import ProductCard from "../components/contents/ProductCard";
 function Home() {
   return (
     <main>
-      <h1>Home Page</h1>
-
       <h1>BRAND NEW!</h1>
       <ProductCard />
 
