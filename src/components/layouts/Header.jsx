@@ -116,19 +116,15 @@ function Header() {
                 {shoppingCart.map((item) => (
                   <div key={item.productID} className="p-3 flex gap-2">
                     <img
-                      src={item.productImage}
-                      alt={item.productName}
+                      src={item.image}
+                      alt={item.name}
                       className="w-20 h-20 object-contain rounded-lg"
                     />
 
                     <div className="flex flex-col justify-between flex-grow">
                       <div>
-                        <p className="text-base font-bold">
-                          {item.productName}
-                        </p>
-                        <p className="text-red-500 font-bold">
-                          ${item.productPrice}
-                        </p>
+                        <p className="text-base font-bold">{item.name}</p>
+                        <p className="text-red-500 font-bold">${item.price}</p>
                       </div>
 
                       <div className="mt-2 inline-flex rounded-md overflow-hidden">
@@ -159,9 +155,7 @@ function Header() {
                       >
                         <TbTrash />
                       </button>
-                      <p>
-                        Total: ${(item.productPrice * item.quantity).toFixed(2)}
-                      </p>
+                      <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
                     </div>
                   </div>
                 ))}
