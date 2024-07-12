@@ -28,18 +28,18 @@ const CheckOut = () => {
                     <td>
                       <img
                         className="w-16 h-16 object-cover"
-                        src={item.productImage}
+                        src={item.image}
                         alt="Product Image"
                       />
                     </td>
 
-                    <td>{item.productName}</td>
+                    <td>{item.name}</td>
 
                     <td>{item.quantity}</td>
 
-                    <td>${item.productPrice}</td>
+                    <td>${item.price}</td>
 
-                    <td>${(item.productPrice * item.quantity).toFixed(2)}</td>
+                    <td>${(item.price * item.quantity).toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -50,7 +50,7 @@ const CheckOut = () => {
                 Total: $
                 {shoppingCart
                   .reduce(
-                    (total, item) => total + item.productPrice * item.quantity,
+                    (total, item) => total + item.price * item.quantity,
                     0,
                   )
                   .toFixed(2)}
