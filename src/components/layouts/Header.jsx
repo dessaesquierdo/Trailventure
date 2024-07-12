@@ -5,7 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { auth } from "../../utils/firebase";
 import {
   addQuantity,
-  // removeProduct,
+  removeProduct,
   shoppingCartAtom,
   subtractQuantity,
 } from "../../atom/shoppingCart";
@@ -151,7 +151,7 @@ function Header() {
                     <div className="flex flex-col items-end justify-between">
                       <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-full text-xs"
-                        // onClick={() => removeProduct(item.productID)}
+                        onClick={() => removeProduct(item.productID)}
                       >
                         <TbTrash />
                       </button>

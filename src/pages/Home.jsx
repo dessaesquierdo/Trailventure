@@ -10,7 +10,7 @@ function Home() {
 
       <div className="mb-8">
         <h1 className="text-2xl font-bold mb-4">BEST SELLING</h1>
-        <ProductCard randomize={false} />
+        <ProductCard randomize={true} />
       </div>
 
       <div className="mb-8">
