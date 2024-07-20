@@ -1,0 +1,59 @@
+import "./App.css";
+import { useFormik, Formik, Form, Field } from "formik";
+import { signuoValidation } from "signuoValidation";
+
+const initialValues = {
+    name:""
+    email:""
+    password:"" 
+    cpassword:""
+};
+
+function App() 
+    
+    return (
+        <div className="App">
+            <Formik
+            initiaLvalues={initialValues}
+            validationSchema={signupvalidation}
+            >
+             {({error}) => (
+
+             )}
+             
+            <Form>
+                <label htmlFor="name">Name</label>
+                <br />
+                <Field type="text" name="></Field>
+                <br />
+                {errors.name && <small>{errors.name}</small>}
+                <br />
+
+                <label htmlFor="email=">Email </label>
+                <br />
+                <Field type="email" name="email"></Field>
+                < br/>
+                {errors.email && <small>{errors.email}</small>}
+                <br />
+                
+                <label htmlFor="password">Password</label>
+                <br />
+                <Field type="password" name="password"></Field>
+                <br />
+                {errors.name && <small>{errors.password}</small>}
+                <br />
+                <label htmlFor="cpassword">Confirm Password</label>
+                <br />
+                <Field type="passsword" name="cpassword"></Field>
+                <br />
+                {errors.name && <small>{errors.cpassword}</small>}
+                <br />
+                <button type="submit">Submit</button>
+
+            
+     
+            <form onSubmit={handleSubmit}>
+                
+                </form>
+                </Formik>
+            </div>
