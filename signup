@@ -1,0 +1,42 @@
+import "./App.css";
+import { useFormik, Formik, Form, Field } from "formik";
+import { signuoValidation } from "signuoValidation";
+
+const initialValues = {
+    name:""
+    email:""
+    password:"" 
+    cpassword:""
+};
+
+function App() {
+    const { values, handleBlur, handleChange, handleSubmit, errors } = useFormik({
+        initiaLvalues: initialValues    
+        validationSchema: signupvalidation,
+        onSubmit: (values) => {
+            console.log(values);
+        },
+    });
+
+    return (
+        <div className="App">
+            <Formik
+            initiaLvalues={initialValues}
+            validationSchema={signupvalidation}
+            >
+            <Form>
+                <label htmlFor="name">Name</label>
+                <br />
+                <input
+                type="text"
+                name="name"
+                onBlur={handleBlur};</div>
+            </form>
+        </div>
+    )
+            <form onSubmit={handleSubmit}>
+                </form>
+                </Formik>
+            </div>
+    );
+}
